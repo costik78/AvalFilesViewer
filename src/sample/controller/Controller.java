@@ -12,6 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import sample.pojo.*;
+import sample.task.X5Task;
+import sample.task.X6Task;
+import sample.task.X7Task;
+import sample.task.X8Task;
 import sample.util.MyCurrency;
 import sample.util.PropertiesValues;
 
@@ -89,23 +93,14 @@ public class Controller {
     @FXML
     private void initialize() {
         initData();
+    }
 
-        SortedList<FileX5> sortedX5 = filteredX5.sorted();
-        SortedList<FileX6> sortedX6 = filteredX6.sorted();
-        SortedList<FileX7> sortedX7 = filteredX7.sorted();
-        SortedList<FileX8> sortedX8 = filteredX8.sorted();
+    private void createThread(Task task, TableView<?> table) {
+        table.itemsProperty().bind(task.valueProperty());
 
-        // связываем сорт-листы с сортировкой таблицы
-        sortedX5.comparatorProperty().bind(tableX5.comparatorProperty());
-        sortedX6.comparatorProperty().bind(tableX6.comparatorProperty());
-        sortedX7.comparatorProperty().bind(tableX7.comparatorProperty());
-        sortedX8.comparatorProperty().bind(tableX8.comparatorProperty());
-
-        // заполняем таблицу данными
-        tableX5.setItems(sortedX5);
-        tableX6.setItems(sortedX6);
-        tableX7.setItems(sortedX7);
-        tableX8.setItems(sortedX8);
+        Thread t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
     }
 
     // подготавливаем данные для таблицы
@@ -116,28 +111,19 @@ public class Controller {
         Properties config = PropertiesValues.get();
 
         Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x5.file"));
-
-        List<FileX5> x5 = X5Converter.getData(path);
-        ObservableList<FileX5> dataX5 = FXCollections.observableList(x5);
-        filteredX5 = dataX5.filtered(null);
+        createThread(new X5Task(path), tableX5);
         labelX5.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
-        List<FileX6> x6 = X6Converter.getData(path);
-        ObservableList<FileX6> dataX6 = FXCollections.observableList(x6);
-        filteredX6 = dataX6.filtered(null);
+        createThread(new X6Task(path), tableX6);
         labelX6.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x7.file"));
-        List<FileX7> x7 = X7Converter.getData(path);
-        ObservableList<FileX7> dataX7 = FXCollections.observableList(x7);
-        filteredX7 = dataX7.filtered(null);
+        createThread(new X7Task(path), tableX7);
         labelX7.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
-        List<FileX8> x8 = X8Converter.getData(path);
-        ObservableList<FileX8> dataX8 = FXCollections.observableList(x8);
-        filteredX8 = dataX8.filtered(null);
+        createThread(new X8Task(path),tableX8);
         labelX8.setText(path.toString());
     }
 
@@ -161,15 +147,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X5", "#X5 files", "#X5*.*");
 
         if(filepath != null) {
+            createThread(new X5Task(filepath), tableX5);
             labelX5.setText(filepath.toString());
-
-            ObservableList<FileX5> dataX5 = FXCollections.observableList(X5Converter.getData(filepath));
-            filteredX5 = new FilteredList<>(dataX5);
-            SortedList<FileX5> sortedX5 = new SortedList<>(filteredX5);
-            sortedX5.comparatorProperty().bind(tableX5.comparatorProperty());
-
-            tableX5.setItems(sortedX5);
-
             tabPane.getSelectionModel().select(tabX5);
         }
     }
@@ -180,15 +159,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X6", "#X6 files", "#X6*.*");
 
         if(filepath != null) {
+            createThread(new X6Task(filepath), tableX6);
             labelX6.setText(filepath.toString());
-
-            ObservableList<FileX6> dataX6 = FXCollections.observableList(X6Converter.getData(filepath));
-            filteredX6 = new FilteredList<>(dataX6);
-            SortedList<FileX6> sortedX6 = new SortedList<>(filteredX6);
-            sortedX6.comparatorProperty().bind(tableX6.comparatorProperty());
-
-            tableX6.setItems(sortedX6);
-
             tabPane.getSelectionModel().select(tabX6);
         }
     }
@@ -199,15 +171,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X7", "#X7 files", "#X7*.*");
 
         if(filepath != null) {
+            createThread(new X7Task(filepath), tableX7);
             labelX7.setText(filepath.toString());
-
-            ObservableList<FileX7> dataX7 = FXCollections.observableList(X7Converter.getData(filepath));
-            filteredX7 = new FilteredList<>(dataX7);
-            SortedList<FileX7> sortedX7 = new SortedList<>(filteredX7);
-            sortedX7.comparatorProperty().bind(tableX7.comparatorProperty());
-
-            tableX7.setItems(sortedX7);
-
             tabPane.getSelectionModel().select(tabX7);
         }
     }
@@ -219,15 +184,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X8", "#X8 files", "#X8*.*");
 
         if(filepath != null) {
+            createThread(new X8Task(filepath), tableX8);
             labelX8.setText(filepath.toString());
-
-            ObservableList<FileX8> dataX8 = FXCollections.observableList(X8Converter.getData(filepath));
-            filteredX8 = new FilteredList<>(dataX8);
-            SortedList<FileX8> sortedX8 = new SortedList<>(filteredX8);
-            sortedX8.comparatorProperty().bind(tableX8.comparatorProperty());
-
-            tableX8.setItems(sortedX8);
-
             tabPane.getSelectionModel().select(tabX8);
         }
     }
