@@ -1,8 +1,7 @@
 package sample.task;
 
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import sample.controller.X8Converter;
 import sample.pojo.FileX8;
@@ -13,18 +12,23 @@ import java.util.List;
 /**
  * Created by conti on 08.12.2016.
  */
-public class X8Task extends Task<ObservableList<FileX8>> {
+public class X8Task extends Task<List<FileX8>> {
     private Path filepath;
+    private ObservableList<FileX8> list;
 
-    public X8Task(Path filepath) {
+    public X8Task(Path filepath, ObservableList<FileX8> list) {
         this.filepath = filepath;
+        this.list = list;
     }
 
     @Override
-    protected ObservableList<FileX8> call() throws Exception {
-        List<FileX8> x8 = X8Converter.getData(filepath);
-        ObservableList<FileX8> dataX8 = FXCollections.observableList(x8);
-        FilteredList<FileX8> filteredX8 = dataX8.filtered(null);
-        return filteredX8.sorted();
+    protected List<FileX8> call() throws Exception {
+        return X8Converter.getData(filepath);
+    }
+
+    @Override
+    protected void succeeded() {
+        super.succeeded();
+        Platform.runLater(() -> list.setAll(getValue()));
     }
 }

@@ -1,5 +1,6 @@
 package sample.task;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,18 +14,24 @@ import java.util.List;
 /**
  * Created by conti on 08.12.2016.
  */
-public class X5Task extends Task<ObservableList<FileX5>> {
+public class X5Task extends Task<List<FileX5>> {
     private Path filePath;
+    private ObservableList<FileX5> list;
 
-    public X5Task(Path filePath) {
+    public X5Task(Path filePath, ObservableList<FileX5> list) {
         this.filePath = filePath;
+        this.list = list;
     }
 
     @Override
-    protected ObservableList<FileX5> call() throws Exception {
-        List<FileX5> x5 = X5Converter.getData(filePath);
-        ObservableList<FileX5> dataX5 = FXCollections.observableList(x5);
-        FilteredList<FileX5> filtered = dataX5.filtered(null);
-        return filtered.sorted();
+    protected List<FileX5> call() throws Exception {
+        return X5Converter.getData(filePath);
+    }
+
+    @Override
+    protected void succeeded() {
+        super.succeeded();
+
+        Platform.runLater(() -> list.setAll(getValue()));
     }
 }
