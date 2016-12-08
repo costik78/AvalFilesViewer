@@ -48,7 +48,7 @@
    <center>
       <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="tabX5" onSelectionChanged="#changeTab" text="Файл #X5">
+          <Tab fx:id="tabX5" text="Файл #X5">
             <content>
                   <BorderPane>
                      <center>
@@ -136,7 +136,7 @@
                   </BorderPane>
             </content>
           </Tab>
-            <Tab fx:id="tabX6" onSelectionChanged="#changeTab" text="Файл #X6">
+            <Tab fx:id="tabX6" text="Файл #X6">
               <content>
                   <BorderPane>
                      <center>
@@ -188,7 +188,7 @@
                   </BorderPane>
               </content>
             </Tab>
-            <Tab fx:id="tabX7" onSelectionChanged="#changeTab" styleClass="table-cell-right" text="Файл #X7">
+            <Tab fx:id="tabX7" styleClass="table-cell-right" text="Файл #X7">
               <content>
                   <BorderPane>
                      <center>
@@ -239,7 +239,7 @@
                   </BorderPane>
               </content>
             </Tab>
-          <Tab fx:id="tabX8" onSelectionChanged="#changeTab" text="Файл #X8">
+          <Tab fx:id="tabX8" text="Файл #X8">
             <content>
                   <BorderPane>
                      <center>

@@ -91,12 +91,13 @@ public class Controller {
 
     // инициализируем форму данными
     @FXML
-    private void initialize() {
+    public void initialize() {
         initData();
     }
 
     private void createThread(Task task, TableView<?> table) {
         table.itemsProperty().bind(task.valueProperty());
+        table.disableProperty().bind(task.runningProperty());
 
         Thread t = new Thread(task);
         t.setDaemon(true);
@@ -125,6 +126,11 @@ public class Controller {
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
         createThread(new X8Task(path),tableX8);
         labelX8.setText(path.toString());
+
+        filterAcc.disableProperty().bind(tabX8.selectedProperty());
+        filterTreat.disableProperty().bind(tabX8.selectedProperty());
+        filterCurrency.disableProperty().bind(tabX8.selectedProperty());
+        filterRegnmbr.disableProperty().bind(tabX8.selectedProperty().not());
     }
 
     private Path selectFile(String dialogDescription, String fileDescription, String fileExtension) {
@@ -195,22 +201,6 @@ public class Controller {
         Platform.exit();
         System.exit(0);
     }
-
-    @FXML
-    private void changeTab(Event event) {
-        if(event.getSource() != tabX8) {
-            filterAcc.setDisable(false);
-            filterTreat.setDisable(false);
-            filterCurrency.setDisable(false);
-            filterRegnmbr.setDisable(true);
-        } else {
-            filterAcc.setDisable(true);
-            filterTreat.setDisable(true);
-            filterCurrency.setDisable(true);
-            filterRegnmbr.setDisable(false);
-        }
-    }
-
 
     //
     @FXML
