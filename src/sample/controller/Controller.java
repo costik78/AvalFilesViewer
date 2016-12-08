@@ -86,7 +86,7 @@ public class Controller {
 
     // инициализируем форму данными
     @FXML
-    private void initialize() {
+    public void initialize() {
         initData();
 
         SortedList<FileX5> sortedX5 = new SortedList<>(filteredX5);
