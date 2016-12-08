@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import sample.pojo.*;
-import sample.task.X5Task;
 import sample.util.MyCurrency;
 import sample.util.PropertiesValues;
 
@@ -91,10 +90,10 @@ public class Controller {
     private void initialize() {
         initData();
 
-        SortedList<FileX5> sortedX5 = new SortedList<>(filteredX5);
-        SortedList<FileX6> sortedX6 = new SortedList<>(filteredX6);
-        SortedList<FileX7> sortedX7 = new SortedList<>(filteredX7);
-        SortedList<FileX8> sortedX8 = new SortedList<>(filteredX8);
+        SortedList<FileX5> sortedX5 = filteredX5.sorted();
+        SortedList<FileX6> sortedX6 = filteredX6.sorted();
+        SortedList<FileX7> sortedX7 = filteredX7.sorted();
+        SortedList<FileX8> sortedX8 = filteredX8.sorted();
 
         // связываем сорт-листы с сортировкой таблицы
         sortedX5.comparatorProperty().bind(tableX5.comparatorProperty());
@@ -120,25 +119,25 @@ public class Controller {
 
         List<FileX5> x5 = X5Converter.getData(path);
         ObservableList<FileX5> dataX5 = FXCollections.observableList(x5);
-        filteredX5 = new FilteredList<>(dataX5);
+        filteredX5 = dataX5.filtered(null);
         labelX5.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
         List<FileX6> x6 = X6Converter.getData(path);
         ObservableList<FileX6> dataX6 = FXCollections.observableList(x6);
-        filteredX6 = new FilteredList<>(dataX6);
+        filteredX6 = dataX6.filtered(null);
         labelX6.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x7.file"));
         List<FileX7> x7 = X7Converter.getData(path);
         ObservableList<FileX7> dataX7 = FXCollections.observableList(x7);
-        filteredX7 = new FilteredList<>(dataX7);
+        filteredX7 = dataX7.filtered(null);
         labelX7.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
         List<FileX8> x8 = X8Converter.getData(path);
         ObservableList<FileX8> dataX8 = FXCollections.observableList(x8);
-        filteredX8 = new FilteredList<>(dataX8);
+        filteredX8 = dataX8.filtered(null);
         labelX8.setText(path.toString());
     }
 
@@ -264,7 +263,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if(answer.isEmpty()) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getAccount().startsWith(answer) );
             }
@@ -288,7 +287,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if( answer.isEmpty() ) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getTrNumber().startsWith(answer));
             }
@@ -312,7 +311,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if(answer.isEmpty()) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getCurrency() == MyCurrency.getCode(answer));
             }
@@ -336,7 +335,7 @@ public class Controller {
             Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
             if (selectedTab == tabX8) {
                 if (answer.isEmpty()) {
-                    filteredX8.setPredicate(e -> true);
+                    filteredX8.setPredicate(null);
                 } else {
                     filteredX8.setPredicate(e -> e.getRegnumber() == Integer.parseInt(answer));
                 }
@@ -348,22 +347,22 @@ public class Controller {
     private void resetCurrentTabFilters(ActionEvent event) {
         Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
         if (selectedTab == tabX5) {
-            filteredX5.setPredicate(e -> true);
+            filteredX5.setPredicate(null);
         } else if (selectedTab == tabX6) {
-            filteredX6.setPredicate(e -> true);
+            filteredX6.setPredicate(null);
         } else if (selectedTab == tabX7) {
-            filteredX7.setPredicate(e -> true);
+            filteredX7.setPredicate(null);
         } else if (selectedTab == tabX8) {
-            filteredX8.setPredicate(e -> true);
+            filteredX8.setPredicate(null);
         }
     }
 
     @FXML
     private void resetAllFilters(ActionEvent event) {
-        filteredX5.setPredicate(e -> true);
-        filteredX6.setPredicate(e -> true);
-        filteredX7.setPredicate(e -> true);
-        filteredX8.setPredicate(e -> true);
+        filteredX5.setPredicate(null);
+        filteredX6.setPredicate(null);
+        filteredX7.setPredicate(null);
+        filteredX8.setPredicate(null);
     }
 
 }
