@@ -11,10 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import sample.pojo.*;
-import sample.task.X5Task;
-import sample.task.X6Task;
-import sample.task.X7Task;
-import sample.task.X8Task;
 import sample.util.MyCurrency;
 import sample.util.PropertiesValues;
 
@@ -141,19 +137,19 @@ public class Controller {
         filteredX7 = new FilteredList<>(datax7);
         filteredX8 = new FilteredList<>(datax8);
 
-        createThread(new X5Task(path, datax5), tableX5);
+        createThread(new XXTask<>(path, datax5, X5Converter::getData), tableX5);
         labelX5.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
-        createThread(new X6Task(path, datax6), tableX6);
+        createThread(new XXTask<>(path, datax6, X6Converter::getData), tableX6);
         labelX6.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x7.file"));
-        createThread(new X7Task(path, datax7), tableX7);
+        createThread(new XXTask<>(path, datax7, X7Converter::getData), tableX7);
         labelX7.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
-        createThread(new X8Task(path, datax8), tableX8);
+        createThread(new XXTask<>(path, datax8, X8Converter::getData), tableX8);
         labelX8.setText(path.toString());
 
         filterAcc.disableProperty().bind(tabX8.selectedProperty());
@@ -182,7 +178,7 @@ public class Controller {
         Path filepath = selectFile("Choose #X5", "#X5 files", "#X5*.*");
 
         if(filepath != null) {
-            createThread(new X5Task(filepath, datax5), tableX5);
+            createThread(new XXTask<>(filepath, datax5, X5Converter::getData), tableX5);
             labelX5.setText(filepath.toString());
             tabPane.getSelectionModel().select(tabX5);
         }
@@ -194,7 +190,7 @@ public class Controller {
         Path filepath = selectFile("Choose #X6", "#X6 files", "#X6*.*");
 
         if(filepath != null) {
-            createThread(new X6Task(filepath, datax6), tableX6);
+            createThread(new XXTask<>(filepath, datax6, X6Converter::getData), tableX6);
             labelX6.setText(filepath.toString());
             tabPane.getSelectionModel().select(tabX6);
         }
@@ -206,7 +202,7 @@ public class Controller {
         Path filepath = selectFile("Choose #X7", "#X7 files", "#X7*.*");
 
         if(filepath != null) {
-            createThread(new X7Task(filepath, datax7), tableX7);
+            createThread(new XXTask<>(filepath, datax7, X7Converter::getData), tableX7);
             labelX7.setText(filepath.toString());
             tabPane.getSelectionModel().select(tabX7);
         }
@@ -219,7 +215,7 @@ public class Controller {
         Path filepath = selectFile("Choose #X8", "#X8 files", "#X8*.*");
 
         if(filepath != null) {
-            createThread(new X8Task(filepath, datax8), tableX8);
+            createThread(new XXTask<>(filepath, datax8, X8Converter::getData), tableX8);
             labelX8.setText(filepath.toString());
             tabPane.getSelectionModel().select(tabX8);
         }

@@ -1,4 +1,4 @@
-package sample.task;
+package sample.controller;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -8,22 +8,25 @@ import sample.pojo.FileX6;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by conti on 08.12.2016.
  */
-public class X6Task extends Task<List<FileX6>> {
+public class XXTask<T> extends Task<List<T>> {
     private Path filePath;
-    private ObservableList<FileX6> list;
+    private ObservableList<T> list;
+    private Function<Path, List<T>> puller;
 
-    public X6Task(Path filePath, ObservableList<FileX6> list) {
+    public XXTask(Path filePath, ObservableList<T> list, Function<Path, List<T>> puller) {
         this.filePath = filePath;
         this.list = list;
+        this.puller = puller;
     }
 
     @Override
-    protected List<FileX6> call() throws Exception {
-        return X6Converter.getData(filePath);
+    protected List<T> call() throws Exception {
+        return puller.apply(filePath);
     }
 
     @Override
