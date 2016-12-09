@@ -4,23 +4,22 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by conti on 29.11.2016.
  */
-public class DateCellFactory<S> implements Callback<TableColumn<S, Date>, TableCell<S,Date>> {
+public class DateCellFactory<S> implements Callback<TableColumn<S, LocalDate>, TableCell<S, LocalDate>> {
 
-    private static final DateFormat myDateFormatter = new SimpleDateFormat("dd LLLL yyyy");
+    private static final DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
     @Override
-    public TableCell<S, Date> call(TableColumn<S, Date> param) {
+    public TableCell<S, LocalDate> call(TableColumn<S, LocalDate> param) {
 
-        return new TableCell<S, Date>() {
+        return new TableCell<S, LocalDate>() {
             @Override
-            protected void updateItem(Date item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if(empty || item == null) {
