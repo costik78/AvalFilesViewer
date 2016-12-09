@@ -11,12 +11,12 @@ import java.util.function.Function;
 /**
  * Created by conti on 08.12.2016.
  */
-public class XXTask<T> extends Task<List<T>> {
+public class FileTask<T> extends Task<List<T>> {
     private Path filePath;
     private ObservableList<T> list;
     private Function<Path, List<T>> puller;
 
-    public XXTask(Path filePath, ObservableList<T> list, Function<Path, List<T>> puller) {
+    public FileTask(Path filePath, ObservableList<T> list, Function<Path, List<T>> puller) {
         this.filePath = filePath;
         this.list = list;
         this.puller = puller;
