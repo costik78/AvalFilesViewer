@@ -1,4 +1,4 @@
-package sample.controller;
+package ua.ibis.avalfile.controller;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -10,9 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import sample.pojo.*;
-import sample.util.MyCurrency;
-import sample.util.PropertiesValues;
+import ua.ibis.avalfile.util.MyCurrency;
+import ua.ibis.avalfile.util.PropertiesValues;
+import ua.ibis.avalfile.pojo.*;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 
 public class Controller {
 
+    // lists to keep data from files
     private ObservableList<FileX5> datax5;
     private ObservableList<FileX6> datax6;
     private ObservableList<FileX7> datax7;
@@ -337,5 +338,4 @@ public class Controller {
         filteredX7.setPredicate(null);
         filteredX8.setPredicate(null);
     }
-
 }

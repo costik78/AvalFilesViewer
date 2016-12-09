@@ -1,10 +1,8 @@
-package sample.controller;
+package ua.ibis.avalfile.controller;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import sample.controller.X6Converter;
-import sample.pojo.FileX6;
 
 import java.nio.file.Path;
 import java.util.List;

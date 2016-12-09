@@ -1,4 +1,4 @@
-package sample.views;
+package ua.ibis.avalfile.views;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;

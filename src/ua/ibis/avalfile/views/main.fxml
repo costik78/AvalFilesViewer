@@ -12,12 +12,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
-<?import sample.views.CurrencyCellValueFactory?>
-<?import sample.views.DateCellFactory?>
-<?import sample.views.IndexingCellValueFactory?>
-<?import sample.views.MoneyCellFactory?>
+<?import ua.ibis.avalfile.views.CurrencyCellValueFactory?>
+<?import ua.ibis.avalfile.views.DateCellFactory?>
+<?import ua.ibis.avalfile.views.IndexingCellValueFactory?>
+<?import ua.ibis.avalfile.views.MoneyCellFactory?>
 
-<BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+<BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>

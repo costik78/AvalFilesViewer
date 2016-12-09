@@ -1,4 +1,4 @@
-package sample.controller;
+package ua.ibis.avalfile.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;

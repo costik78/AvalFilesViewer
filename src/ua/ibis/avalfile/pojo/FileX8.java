@@ -1,4 +1,4 @@
-package sample.pojo;
+package ua.ibis.avalfile.pojo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
