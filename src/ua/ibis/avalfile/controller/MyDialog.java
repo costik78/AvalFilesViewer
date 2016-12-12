@@ -5,9 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import ua.ibis.avalfile.util.PropertiesValues;
 //import javafx.stage.Modality;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Properties;
 
 /**
  * Created by conti on 25.11.2016.
@@ -51,4 +56,18 @@ public class MyDialog {
 //
 //        alert.showAndWait();
 //    }
+
+    public static Path selectFile(String dialogDescription, String fileDescription, String fileExtension) {
+
+        FileChooser chooser = new FileChooser();
+
+        Properties properties = PropertiesValues.get();
+        chooser.setInitialDirectory(new File(properties.getProperty("dirfiles")));
+        chooser.setTitle(dialogDescription);
+        chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(fileDescription, fileExtension));
+
+        File selectedfile = chooser.showOpenDialog(null);
+
+        return (selectedfile != null ? selectedfile.toPath() : null);
+    }
 }

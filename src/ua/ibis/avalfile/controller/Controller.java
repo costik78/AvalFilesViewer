@@ -9,16 +9,17 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import ua.ibis.avalfile.util.MyCurrency;
 import ua.ibis.avalfile.util.PropertiesValues;
 import ua.ibis.avalfile.pojo.*;
 
-import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.function.Predicate;
+
+import static ua.ibis.avalfile.controller.MyDialog.selectFile;
+
 
 public class Controller {
 
@@ -157,20 +158,6 @@ public class Controller {
         filterTreat.disableProperty().bind(tabX8.selectedProperty());
         filterCurrency.disableProperty().bind(tabX8.selectedProperty());
         filterRegnmbr.disableProperty().bind(tabX8.selectedProperty().not());
-    }
-
-    private Path selectFile(String dialogDescription, String fileDescription, String fileExtension) {
-
-        FileChooser chooser = new FileChooser();
-
-        Properties properties = PropertiesValues.get();
-        chooser.setInitialDirectory(new File(properties.getProperty("dirfiles")));
-        chooser.setTitle(dialogDescription);
-        chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(fileDescription, fileExtension));
-
-        File selectedfile = chooser.showOpenDialog(null);
-
-        return (selectedfile != null ? selectedfile.toPath() : null);
     }
 
     @FXML
