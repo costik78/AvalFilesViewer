@@ -1,6 +1,6 @@
-package sample.controller;
+package ua.ibis.avalfile.controller;
 
-import sample.pojo.FileX8;
+import ua.ibis.avalfile.pojo.FileX8;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

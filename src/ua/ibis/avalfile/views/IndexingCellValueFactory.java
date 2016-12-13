@@ -1,4 +1,4 @@
-package sample.views;
+package ua.ibis.avalfile.views;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;

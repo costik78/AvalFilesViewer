@@ -1,11 +1,11 @@
-package sample.views;
+package ua.ibis.avalfile.views;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-import sample.pojo.FileXX;
-import sample.util.MyCurrency;
+import ua.ibis.avalfile.pojo.FileXX;
+import ua.ibis.avalfile.util.MyCurrency;
 
 /**
  * Created by conti on 28.11.2016.

@@ -12,12 +12,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
-<?import sample.views.CurrencyCellValueFactory?>
-<?import sample.views.DateCellFactory?>
-<?import sample.views.IndexingCellValueFactory?>
-<?import sample.views.MoneyCellFactory?>
+<?import ua.ibis.avalfile.views.CurrencyCellValueFactory?>
+<?import ua.ibis.avalfile.views.DateCellFactory?>
+<?import ua.ibis.avalfile.views.IndexingCellValueFactory?>
+<?import ua.ibis.avalfile.views.MoneyCellFactory?>
 
-<BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+<BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -48,7 +48,7 @@
    <center>
       <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="tabX5" onSelectionChanged="#changeTab" text="Файл #X5">
+          <Tab fx:id="tabX5" text="Файл #X5">
             <content>
                   <BorderPane>
                      <center>
@@ -136,7 +136,7 @@
                   </BorderPane>
             </content>
           </Tab>
-            <Tab fx:id="tabX6" onSelectionChanged="#changeTab" text="Файл #X6">
+            <Tab fx:id="tabX6" text="Файл #X6">
               <content>
                   <BorderPane>
                      <center>
@@ -188,7 +188,7 @@
                   </BorderPane>
               </content>
             </Tab>
-            <Tab fx:id="tabX7" onSelectionChanged="#changeTab" styleClass="table-cell-right" text="Файл #X7">
+            <Tab fx:id="tabX7" styleClass="table-cell-right" text="Файл #X7">
               <content>
                   <BorderPane>
                      <center>
@@ -239,7 +239,7 @@
                   </BorderPane>
               </content>
             </Tab>
-          <Tab fx:id="tabX8" onSelectionChanged="#changeTab" text="Файл #X8">
+          <Tab fx:id="tabX8" text="Файл #X8">
             <content>
                   <BorderPane>
                      <center>

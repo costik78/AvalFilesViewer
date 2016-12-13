@@ -1,4 +1,4 @@
-package sample.pojo;
+package ua.ibis.avalfile.pojo;
 
 /**
  * Created by conti on 25.11.2016.
