@@ -1,4 +1,4 @@
-package sample.util;
+package ua.ibis.avalfile.util;
 
 import java.io.IOException;
 import java.io.InputStream;

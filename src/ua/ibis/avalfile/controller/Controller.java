@@ -1,27 +1,33 @@
-package sample.controller;
+package ua.ibis.avalfile.controller;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import sample.pojo.*;
-import sample.util.MyCurrency;
-import sample.util.PropertiesValues;
+import ua.ibis.avalfile.util.MyCurrency;
+import ua.ibis.avalfile.util.PropertiesValues;
+import ua.ibis.avalfile.pojo.*;
 
-import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Properties;
 import java.util.function.Predicate;
 
+import static ua.ibis.avalfile.controller.MyDialog.selectFile;
+
+
 public class Controller {
+
+    // lists to keep data from files
+    private ObservableList<FileX5> datax5;
+    private ObservableList<FileX6> datax6;
+    private ObservableList<FileX7> datax7;
+    private ObservableList<FileX8> datax8;
 
     private FilteredList<FileX5> filteredX5;
     private FilteredList<FileX6> filteredX6;
@@ -86,7 +92,7 @@ public class Controller {
 
     // инициализируем форму данными
     @FXML
-    private void initialize() {
+    public void initialize() {
         initData();
 
         SortedList<FileX5> sortedX5 = new SortedList<>(filteredX5);
@@ -107,6 +113,15 @@ public class Controller {
         tableX8.setItems(sortedX8);
     }
 
+    private void createThread(Task task, TableView<?> table) {
+//        table.itemsProperty().bind(task.valueProperty());
+        table.disableProperty().bind(task.runningProperty());
+
+        Thread t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
+    }
+
     // подготавливаем данные для таблицы
     // вы можете получать их с базы данных
     private void initData() {
@@ -115,43 +130,34 @@ public class Controller {
         Properties config = PropertiesValues.get();
 
         Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x5.file"));
+        datax5 = FXCollections.observableArrayList();
+        datax6 = FXCollections.observableArrayList();
+        datax7 = FXCollections.observableArrayList();
+        datax8 = FXCollections.observableArrayList();
+        filteredX5 = new FilteredList<>(datax5);
+        filteredX6 = new FilteredList<>(datax6);
+        filteredX7 = new FilteredList<>(datax7);
+        filteredX8 = new FilteredList<>(datax8);
 
-        List<FileX5> x5 = X5Converter.getData(path);
-        ObservableList<FileX5> dataX5 = FXCollections.observableList(x5);
-        filteredX5 = new FilteredList<>(dataX5);
+        createThread(new FileTask<>(path, datax5, X5Converter::getData), tableX5);
         labelX5.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
-        List<FileX6> x6 = X6Converter.getData(path);
-        ObservableList<FileX6> dataX6 = FXCollections.observableList(x6);
-        filteredX6 = new FilteredList<>(dataX6);
+        createThread(new FileTask<>(path, datax6, X6Converter::getData), tableX6);
         labelX6.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x7.file"));
-        List<FileX7> x7 = X7Converter.getData(path);
-        ObservableList<FileX7> dataX7 = FXCollections.observableList(x7);
-        filteredX7 = new FilteredList<>(dataX7);
+        createThread(new FileTask<>(path, datax7, X7Converter::getData), tableX7);
         labelX7.setText(path.toString());
 
         path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
-        List<FileX8> x8 = X8Converter.getData(path);
-        ObservableList<FileX8> dataX8 = FXCollections.observableList(x8);
-        filteredX8 = new FilteredList<>(dataX8);
+        createThread(new FileTask<>(path, datax8, X8Converter::getData), tableX8);
         labelX8.setText(path.toString());
-    }
 
-    private Path selectFile(String dialogDescription, String fileDescription, String fileExtension) {
-
-        FileChooser chooser = new FileChooser();
-
-        Properties properties = PropertiesValues.get();
-        chooser.setInitialDirectory(new File(properties.getProperty("dirfiles")));
-        chooser.setTitle(dialogDescription);
-        chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(fileDescription, fileExtension));
-
-        File selectedfile = chooser.showOpenDialog(null);
-
-        return (selectedfile != null ? selectedfile.toPath() : null);
+        filterAcc.disableProperty().bind(tabX8.selectedProperty());
+        filterTreat.disableProperty().bind(tabX8.selectedProperty());
+        filterCurrency.disableProperty().bind(tabX8.selectedProperty());
+        filterRegnmbr.disableProperty().bind(tabX8.selectedProperty().not());
     }
 
     @FXML
@@ -160,15 +166,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X5", "#X5 files", "#X5*.*");
 
         if(filepath != null) {
+            createThread(new FileTask<>(filepath, datax5, X5Converter::getData), tableX5);
             labelX5.setText(filepath.toString());
-
-            ObservableList<FileX5> dataX5 = FXCollections.observableList(X5Converter.getData(filepath));
-            filteredX5 = new FilteredList<>(dataX5);
-            SortedList<FileX5> sortedX5 = new SortedList<>(filteredX5);
-            sortedX5.comparatorProperty().bind(tableX5.comparatorProperty());
-
-            tableX5.setItems(sortedX5);
-
             tabPane.getSelectionModel().select(tabX5);
         }
     }
@@ -179,15 +178,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X6", "#X6 files", "#X6*.*");
 
         if(filepath != null) {
+            createThread(new FileTask<>(filepath, datax6, X6Converter::getData), tableX6);
             labelX6.setText(filepath.toString());
-
-            ObservableList<FileX6> dataX6 = FXCollections.observableList(X6Converter.getData(filepath));
-            filteredX6 = new FilteredList<>(dataX6);
-            SortedList<FileX6> sortedX6 = new SortedList<>(filteredX6);
-            sortedX6.comparatorProperty().bind(tableX6.comparatorProperty());
-
-            tableX6.setItems(sortedX6);
-
             tabPane.getSelectionModel().select(tabX6);
         }
     }
@@ -198,15 +190,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X7", "#X7 files", "#X7*.*");
 
         if(filepath != null) {
+            createThread(new FileTask<>(filepath, datax7, X7Converter::getData), tableX7);
             labelX7.setText(filepath.toString());
-
-            ObservableList<FileX7> dataX7 = FXCollections.observableList(X7Converter.getData(filepath));
-            filteredX7 = new FilteredList<>(dataX7);
-            SortedList<FileX7> sortedX7 = new SortedList<>(filteredX7);
-            sortedX7.comparatorProperty().bind(tableX7.comparatorProperty());
-
-            tableX7.setItems(sortedX7);
-
             tabPane.getSelectionModel().select(tabX7);
         }
     }
@@ -218,15 +203,8 @@ public class Controller {
         Path filepath = selectFile("Choose #X8", "#X8 files", "#X8*.*");
 
         if(filepath != null) {
+            createThread(new FileTask<>(filepath, datax8, X8Converter::getData), tableX8);
             labelX8.setText(filepath.toString());
-
-            ObservableList<FileX8> dataX8 = FXCollections.observableList(X8Converter.getData(filepath));
-            filteredX8 = new FilteredList<>(dataX8);
-            SortedList<FileX8> sortedX8 = new SortedList<>(filteredX8);
-            sortedX8.comparatorProperty().bind(tableX8.comparatorProperty());
-
-            tableX8.setItems(sortedX8);
-
             tabPane.getSelectionModel().select(tabX8);
         }
     }
@@ -237,22 +215,6 @@ public class Controller {
         System.exit(0);
     }
 
-    @FXML
-    private void changeTab(Event event) {
-        if(event.getSource() != tabX8) {
-            filterAcc.setDisable(false);
-            filterTreat.setDisable(false);
-            filterCurrency.setDisable(false);
-            filterRegnmbr.setDisable(true);
-        } else {
-            filterAcc.setDisable(true);
-            filterTreat.setDisable(true);
-            filterCurrency.setDisable(true);
-            filterRegnmbr.setDisable(false);
-        }
-    }
-
-
     //
     @FXML
     private void filterByAccount(ActionEvent event) {
@@ -262,7 +224,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if(answer.isEmpty()) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getAccount().startsWith(answer) );
             }
@@ -286,7 +248,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if( answer.isEmpty() ) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getTrNumber().startsWith(answer));
             }
@@ -310,7 +272,7 @@ public class Controller {
 
             Predicate<FileXX> pr;
             if(answer.isEmpty()) {
-                pr = (e -> true);
+                pr = null;
             } else {
                 pr = (e -> e.getCurrency() == MyCurrency.getCode(answer));
             }
@@ -334,7 +296,7 @@ public class Controller {
             Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
             if (selectedTab == tabX8) {
                 if (answer.isEmpty()) {
-                    filteredX8.setPredicate(e -> true);
+                    filteredX8.setPredicate(null);
                 } else {
                     filteredX8.setPredicate(e -> e.getRegnumber() == Integer.parseInt(answer));
                 }
@@ -346,22 +308,21 @@ public class Controller {
     private void resetCurrentTabFilters(ActionEvent event) {
         Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
         if (selectedTab == tabX5) {
-            filteredX5.setPredicate(e -> true);
+            filteredX5.setPredicate(null);
         } else if (selectedTab == tabX6) {
-            filteredX6.setPredicate(e -> true);
+            filteredX6.setPredicate(null);
         } else if (selectedTab == tabX7) {
-            filteredX7.setPredicate(e -> true);
+            filteredX7.setPredicate(null);
         } else if (selectedTab == tabX8) {
-            filteredX8.setPredicate(e -> true);
+            filteredX8.setPredicate(null);
         }
     }
 
     @FXML
     private void resetAllFilters(ActionEvent event) {
-        filteredX5.setPredicate(e -> true);
-        filteredX6.setPredicate(e -> true);
-        filteredX7.setPredicate(e -> true);
-        filteredX8.setPredicate(e -> true);
+        filteredX5.setPredicate(null);
+        filteredX6.setPredicate(null);
+        filteredX7.setPredicate(null);
+        filteredX8.setPredicate(null);
     }
-
 }

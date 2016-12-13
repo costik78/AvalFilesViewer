@@ -1,8 +1,7 @@
-package sample.pojo;
+package ua.ibis.avalfile.pojo;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by conti on 04.11.2016.
@@ -12,25 +11,20 @@ public class FileX8 {
 
     private int mfo;
     private int regnumber;
-    private Date date;
+    private LocalDate date;
 
     // formatter for date field
-    static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     public void setDate(int date) {
-
-        try {
-            this.date = dateFormat.parse(Integer.toString(date));
-        } catch (ParseException e) {
-            // should add log message
-        }
+        this.date = LocalDate.parse(Integer.toString(date), dateFormat);
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate  date) {
         this.date = date;
     }
 
@@ -54,6 +48,6 @@ public class FileX8 {
 
     @Override
     public String toString() {
-        return String.format("FileX8{ mfo=%d, regnumber=%8d, date=%td-%<tm-%<tY }", mfo, regnumber, date);
+        return String.format("FileX8{ mfo=%d, regnumber=%8d, date=%s }", mfo, regnumber, date.toString());
     }
 }
