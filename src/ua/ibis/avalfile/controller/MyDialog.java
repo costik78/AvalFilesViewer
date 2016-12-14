@@ -1,10 +1,6 @@
 package ua.ibis.avalfile.controller;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import ua.ibis.avalfile.util.PropertiesValues;
 //import javafx.stage.Modality;
@@ -61,7 +57,7 @@ public class MyDialog {
 
         FileChooser chooser = new FileChooser();
 
-        Properties properties = PropertiesValues.get();
+        Properties properties = PropertiesValues.getInstance();
         chooser.setInitialDirectory(new File(properties.getProperty("dirfiles")));
         chooser.setTitle(dialogDescription);
         chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(fileDescription, fileExtension));

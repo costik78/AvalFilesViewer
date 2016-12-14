@@ -11,7 +11,7 @@ public class PropertiesValues {
 
     static final String propertyFileName = "config.properties";
 
-    private static Properties prop;
+    private static volatile Properties prop;
 
     private static void init() {
 
@@ -24,12 +24,20 @@ public class PropertiesValues {
         }
     }
 
-    public static Properties get() {
+    public static Properties getInstance() {
 
-        if (prop == null) {
-            init();
+        Properties properties = prop;
+        if (properties == null) {
+            synchronized (PropertiesValues.class) {
+                properties = prop;
+                if(properties == null) {
+                    init();
+                    properties = prop;
+                }
+            }
         }
 
-        return prop;
+        return properties;
     }
+
 }

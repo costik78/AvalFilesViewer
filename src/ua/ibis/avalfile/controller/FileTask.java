@@ -3,6 +3,7 @@ package ua.ibis.avalfile.controller;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.scene.control.TableView;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -32,4 +33,14 @@ public class FileTask<T> extends Task<List<T>> {
         super.succeeded();
         Platform.runLater(() -> list.setAll(getValue()));
     }
+
+    public void bindAndRun(TableView<?> table) {
+//        table.itemsProperty().bind(this.valueProperty());
+        table.disableProperty().bind(this.runningProperty());
+
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
+    }
+
 }

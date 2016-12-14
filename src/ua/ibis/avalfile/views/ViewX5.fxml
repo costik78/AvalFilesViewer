@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import ua.ibis.avalfile.views.CurrencyCellValueFactory?>
+<?import ua.ibis.avalfile.views.IndexingCellValueFactory?>
+<?import ua.ibis.avalfile.views.MoneyCellFactory?>
+
+<BorderPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.ViewX5Controller">
+   <center>
+       <TableView fx:id="tableX5" prefHeight="200.0" prefWidth="800.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+           <columns>
+               <TableColumn editable="false" prefWidth="56.0" sortable="false" styleClass="table-cell-right" text="#">
+                   <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="57.0" styleClass="table-cell-center" text="МФО">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="mfo" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="62.0" text="Cчет">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="account" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="98.0" text="Номер договора">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="trNumber" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="currencyX5" prefWidth="48.0" styleClass="table-cell-center" text="Валюта">
+                   <cellValueFactory><CurrencyCellValueFactory /></cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="129.0" styleClass="table-cell-right" text="Сумма обеспечения">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="summaObesp" /> </cellValueFactory>
+                   <cellFactory><MoneyCellFactory /></cellFactory>
+               </TableColumn>
+               <TableColumn prefWidth="55.0" styleClass="table-cell-center" text="Риск">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="risk" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Сумма резерва">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="summaReserve" /> </cellValueFactory>
+                   <cellFactory><MoneyCellFactory /></cellFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-center" text="БС4 резерва">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="bs4Reserve" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-center" text="Вид обеспечения">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="obespech" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-center" text="Фин.состояние">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="finState" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn text="Виды обеспечения" visible="false" />
+               <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Сумма резерва П23">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="summaObespP23" /> </cellValueFactory>
+                   <cellFactory><MoneyCellFactory /></cellFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Сумма прощенных процентов">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="summaForgiven" /> </cellValueFactory>
+                   <cellFactory><MoneyCellFactory /></cellFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-center" text="Кол-во дней просрочки">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="DPD" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Группа клиента">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="groupOfClient" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Вероятность дефолта">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="probabilityOfDefault" /> </cellValueFactory>
+               </TableColumn>
+           </columns>
+           <BorderPane.margin>
+               <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+           </BorderPane.margin>
+       </TableView>
+   </center>
+    <bottom>
+        <Label fx:id="labelX5" contentDisplay="RIGHT" textAlignment="RIGHT" BorderPane.alignment="CENTER_RIGHT">
+         <BorderPane.margin>
+            <Insets left="12.0" right="12.0" />
+         </BorderPane.margin></Label>
+    </bottom>
+</BorderPane>
