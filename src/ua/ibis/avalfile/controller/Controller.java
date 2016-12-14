@@ -12,16 +12,16 @@ import java.util.function.Predicate;
 public class Controller {
 
     @FXML
-    ViewX5Controller viewX5Controller;
+    private ViewX5Controller viewX5Controller;
 
     @FXML
-    ViewX6Controller viewX6Controller;
+    private ViewX6Controller viewX6Controller;
 
     @FXML
-    ViewX7Controller viewX7Controller;
+    private ViewX7Controller viewX7Controller;
 
     @FXML
-    ViewX8Controller viewX8Controller;
+    private ViewX8Controller viewX8Controller;
 
     @FXML
     private MenuItem filterAcc;
@@ -64,25 +64,26 @@ public class Controller {
     @FXML
     private void openX5(ActionEvent event){
         viewX5Controller.open(event);
+        tabPane.getSelectionModel().select(tabX5);
     }
 
     @FXML
     private void openX6(ActionEvent event) {
         viewX6Controller.open(event);
-//            tabPane.getSelectionModel().select(tabX6);
+        tabPane.getSelectionModel().select(tabX6);
     }
 
     @FXML
     private void openX7(ActionEvent event) {
         viewX7Controller.open(event);
-//            tabPane.getSelectionModel().select(tabX7);
+        tabPane.getSelectionModel().select(tabX7);
     }
 
 
     @FXML
     private void openX8(ActionEvent event) {
         viewX8Controller.open(event);
-//            tabPane.getSelectionModel().select(tabX8);
+        tabPane.getSelectionModel().select(tabX8);
     }
 
     @FXML

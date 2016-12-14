@@ -51,7 +51,7 @@ public class ViewX6Controller {
     private void loadFile(Path path) {
         if (path != null) {
             new FileTask<>(path, datax6, X6Converter::getData).bindAndRun(tableX6);
-            labelX6.setText(path.toString());
+            labelX6.setText(path.toAbsolutePath().toString());
         }
 
     }
