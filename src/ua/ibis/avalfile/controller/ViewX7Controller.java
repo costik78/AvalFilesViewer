@@ -47,30 +47,31 @@ public class ViewX7Controller {
         tableX7.setItems(sortedX7);
     }
 
+    private void loadFile(Path path) {
+        if (path != null) {
+            new FileTask<>(path, datax7, X7Converter::getData).bindAndRun(tableX7);
+            labelX7.setText(path.toString());
+        }
+
+    }
+
     // подготавливаем данные для таблицы
     // вы можете получать их с базы данных
     private void initData() {
 
-        // загрузка конфигурации
-        Properties config = PropertiesValues.getInstance();
-
         datax7 = FXCollections.observableArrayList();
         filteredX7 = new FilteredList<>(datax7);
 
+        // загрузка конфигурации
+        Properties config = PropertiesValues.getInstance();
+
         Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x7.file"));
-        new FileTask<>(path, datax7, X7Converter::getData).bindAndRun(tableX7);
-        labelX7.setText(path.toString());
+        loadFile(path);
     }
 
     public void open(ActionEvent event) {
-
-        Path filepath = selectFile("Choose #X7", "#X7 files", "#X7*.*");
-
-        if(filepath != null) {
-            new FileTask<>(filepath, datax7, X7Converter::getData).bindAndRun(tableX7);
-            labelX7.setText(filepath.toString());
-//            tabPane.getSelectionModel().select(tabX7);
-        }
+        Path path = selectFile("Choose #X7", "#X7 files", "#X7*.*");
+        loadFile(path);
     }
 
     public void setPredicate(Predicate<FileXX> pr) {

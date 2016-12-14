@@ -13,20 +13,20 @@
     <center>
         <TableView fx:id="tableX8" prefHeight="324.0" prefWidth="600.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" styleClass="table-cell-right" text="#">
+                <TableColumn editable="false" sortable="false" styleClass="table-cell-right" text="#">
                     <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="mfoX8" prefWidth="80.0" styleClass="table-cell-center" text="МФО">
+                <TableColumn styleClass="table-cell-center" text="МФО">
                     <cellValueFactory>
                         <PropertyValueFactory property="mfo" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="regnumberX8" prefWidth="150.0" styleClass="table-cell-right" text="Рег.номер клиента">
+                <TableColumn styleClass="table-cell-right" text="Рег.номер клиента">
                     <cellValueFactory>
                         <PropertyValueFactory property="regnumber" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="dateX8" prefWidth="150.0" styleClass="table-cell-center" text="Граничная дата">
+                <TableColumn styleClass="table-cell-center" text="Граничная дата">
                     <cellValueFactory>
                         <PropertyValueFactory property="date" />
                     </cellValueFactory>
@@ -37,7 +37,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
             <BorderPane.margin>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                <Insets left="12.0" right="12.0" top="12.0" />
             </BorderPane.margin>
         </TableView>
     </center>

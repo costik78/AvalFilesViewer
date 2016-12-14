@@ -10,40 +10,34 @@
 
 <BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.Controller">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#openX5" text="Открыть #X5" />
-              <MenuItem mnemonicParsing="false" onAction="#openX6" text="Открыть #X6" />
-              <MenuItem mnemonicParsing="false" onAction="#openX7" text="Открыть #X7" />
-              <MenuItem mnemonicParsing="false" onAction="#openX8" text="Открыть #X8" />
-              <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Filter">
-              <items>
-                <MenuItem fx:id="filterAcc" mnemonicParsing="false" onAction="#filterByAccount" text="by account" />
-                <MenuItem fx:id="filterTreat" mnemonicParsing="false" onAction="#filterByTreat" text="by treat number" />
-                <MenuItem fx:id="filterCurrency" mnemonicParsing="false" onAction="#filterByCurrency" text="by currency" />
-                <MenuItem fx:id="filterRegnmbr" mnemonicParsing="false" onAction="#filterByRegnmbr" text="by regnumber" />
-                <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" onAction="#resetCurrentTabFilters" text="Reset current tab filters" />
-                <MenuItem mnemonicParsing="false" onAction="#resetAllFilters" text="Reset all filters" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#openX5" text="Открыть #X5"/>
+               <MenuItem mnemonicParsing="false" onAction="#openX6" text="Открыть #X6"/>
+               <MenuItem mnemonicParsing="false" onAction="#openX7" text="Открыть #X7"/>
+               <MenuItem mnemonicParsing="false" onAction="#openX8" text="Открыть #X8"/>
+               <SeparatorMenuItem mnemonicParsing="false"/>
+               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Filter">
+               <MenuItem fx:id="filterAcc" mnemonicParsing="false" onAction="#filterByAccount" text="by account"/>
+               <MenuItem fx:id="filterTreat" mnemonicParsing="false" onAction="#filterByTreat" text="by treat number"/>
+               <MenuItem fx:id="filterCurrency" mnemonicParsing="false" onAction="#filterByCurrency"
+                         text="by currency"/>
+               <MenuItem fx:id="filterRegnmbr" mnemonicParsing="false" onAction="#filterByRegnmbr"
+                         text="by regnumber"/>
+               <SeparatorMenuItem mnemonicParsing="false"/>
+               <MenuItem mnemonicParsing="false" onAction="#resetCurrentTabFilters" text="Reset current tab filters"/>
+               <MenuItem mnemonicParsing="false" onAction="#resetAllFilters" text="Reset all filters"/>
+           </Menu>
+       </MenuBar>
    </top>
    <center>
-      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab fx:id="tabX5" text="Файл #X5" ><fx:include fx:id="viewX5" source="ViewX5.fxml"/></Tab>
-          <Tab fx:id="tabX6" text="Файл #X6" ><fx:include fx:id="viewX6" source="ViewX6.fxml"/></Tab>
-          <Tab fx:id="tabX7" text="Файл #X7" ><fx:include fx:id="viewX7" source="ViewX7.fxml"/></Tab>
-          <Tab fx:id="tabX8" text="Файл #X8" ><fx:include fx:id="viewX8" source="ViewX8.fxml"/></Tab>
-        </tabs>
-      </TabPane>
+       <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+           <Tab fx:id="tabX5" text="Файл #X5"><fx:include source="ViewX5.fxml"/></Tab>
+           <Tab fx:id="tabX6" text="Файл #X6"><fx:include source="ViewX6.fxml"/></Tab>
+           <Tab fx:id="tabX7" text="Файл #X7"><fx:include source="ViewX7.fxml"/></Tab>
+           <Tab fx:id="tabX8" text="Файл #X8"><fx:include source="ViewX8.fxml"/></Tab>
+       </TabPane>
    </center>
 </BorderPane>

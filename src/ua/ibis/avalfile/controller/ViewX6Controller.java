@@ -48,31 +48,31 @@ public class ViewX6Controller {
         tableX6.setItems(sortedX6);
     }
 
+    private void loadFile(Path path) {
+        if (path != null) {
+            new FileTask<>(path, datax6, X6Converter::getData).bindAndRun(tableX6);
+            labelX6.setText(path.toString());
+        }
+
+    }
+
     // подготавливаем данные для таблицы
     // вы можете получать их с базы данных
     private void initData() {
 
-        // загрузка конфигурации
-        Properties config = PropertiesValues.getInstance();
-
-        Path path = null;
         datax6 = FXCollections.observableArrayList();
         filteredX6 = new FilteredList<>(datax6);
 
-        path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
-        new FileTask<>(path, datax6, X6Converter::getData).bindAndRun(tableX6);
-        labelX6.setText(path.toString());
+        // загрузка конфигурации
+        Properties config = PropertiesValues.getInstance();
+
+        Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
+        loadFile(path);
     }
 
     public void open(ActionEvent event) {
-
-        Path filepath = selectFile("Choose #X6", "#X6 files", "#X6*.*");
-
-        if(filepath != null) {
-            new FileTask<>(filepath, datax6, X6Converter::getData).bindAndRun(tableX6);
-            labelX6.setText(filepath.toString());
-//            tabPane.getSelectionModel().select(tabX6);
-        }
+        Path path = selectFile("Choose #X6", "#X6 files", "#X6*.*");
+        loadFile(path);
     }
 
     public void setPredicate(Predicate<FileXX> pr) {

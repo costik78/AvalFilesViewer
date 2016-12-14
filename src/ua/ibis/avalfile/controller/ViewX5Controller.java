@@ -48,27 +48,29 @@ public class ViewX5Controller {
         tableX5.setItems(sortedX5);
     }
 
+    private void loadFile(Path path) {
+        if (path != null) {
+            new FileTask<>(path, datax5, X5Converter::getData).bindAndRun(tableX5);
+            labelX5.setText(path.toString());
+        }
+
+    }
+
     private void initData() {
+
+        datax5 = FXCollections.observableArrayList();
+        filteredX5 = new FilteredList<>(datax5);
 
         // загрузка конфигурации
         Properties config = PropertiesValues.getInstance();
 
         Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x5.file"));
-        datax5 = FXCollections.observableArrayList();
-        filteredX5 = new FilteredList<>(datax5);
-
-        new FileTask<>(path, datax5, X5Converter::getData).bindAndRun(tableX5);
-        labelX5.setText(path.toString());
+        loadFile(path);
     }
 
     public void open(ActionEvent event){
-
-        Path filepath = selectFile("Choose #X5", "#X5 files", "#X5*.*");
-
-        if(filepath != null) {
-            new FileTask<>(filepath, datax5, X5Converter::getData).bindAndRun(tableX5);
-            labelX5.setText(filepath.toString());
-        }
+        Path path = selectFile("Choose #X5", "#X5 files", "#X5*.*");
+        loadFile(path);
     }
 
     public void setPredicate(Predicate<FileXX> pr) {

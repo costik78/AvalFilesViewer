@@ -14,28 +14,28 @@
     <center>
         <TableView fx:id="tableX7" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" styleClass="table-cell-right" text="#">
+                <TableColumn editable="false" sortable="false" styleClass="table-cell-right" text="#">
                     <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="mfoX7" prefWidth="87.0" styleClass="table-cell-center" text="МФО">
+                <TableColumn styleClass="table-cell-center" text="МФО">
                     <cellValueFactory>
                         <PropertyValueFactory property="mfo" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="accountX7" prefWidth="145.0" text="Счет">
+                <TableColumn text="Счет">
                     <cellValueFactory>
                         <PropertyValueFactory property="account" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="trNumberX7" prefWidth="111.0" text="Номер договора">
+                <TableColumn text="Номер договора">
                     <cellValueFactory>
                         <PropertyValueFactory property="trNumber" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="currencyX7" prefWidth="66.0" styleClass="table-cell-center" text="Валюта">
+                <TableColumn styleClass="table-cell-center" text="Валюта">
                     <cellValueFactory><CurrencyCellValueFactory /></cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Доп.сумма">
+                <TableColumn styleClass="table-cell-right" text="Доп.сумма">
                     <cellValueFactory>
                         <PropertyValueFactory property="sum" />
                     </cellValueFactory>
@@ -46,7 +46,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
             <BorderPane.margin>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                <Insets left="12.0" right="12.0" top="12.0" />
             </BorderPane.margin>
         </TableView>
     </center>

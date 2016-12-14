@@ -17,28 +17,28 @@
                 <TableColumn editable="false" prefWidth="75.0" sortable="false" styleClass="table-cell-right" text="#">
                     <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="mfoX6" prefWidth="82.0" styleClass="table-cell-center" text="МФО">
+                <TableColumn prefWidth="82.0" styleClass="table-cell-center" text="МФО">
                     <cellValueFactory>
                         <PropertyValueFactory property="mfo" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="accountX6" prefWidth="110.0" text="Счет">
+                <TableColumn prefWidth="110.0" text="Счет">
                     <cellValueFactory>
                         <PropertyValueFactory property="account" /> </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="trNumberX6" prefWidth="138.0" text="Номер договора">
+                <TableColumn prefWidth="138.0" text="Номер договора">
                     <cellValueFactory>
                         <PropertyValueFactory property="trNumber" /> </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="currencyX6" prefWidth="55.0" styleClass="table-cell-center" text="Валюта">
+                <TableColumn prefWidth="55.0" styleClass="table-cell-center" text="Валюта">
                     <cellValueFactory><CurrencyCellValueFactory /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="sumObespX6" prefWidth="75.0" styleClass="table-cell-right" text="Сумма обеспечения">
+                <TableColumn prefWidth="75.0" styleClass="table-cell-right" text="Сумма обеспечения">
                     <cellValueFactory>
                         <PropertyValueFactory property="summaObesp" /> </cellValueFactory>
                     <cellFactory><MoneyCellFactory /></cellFactory>
                 </TableColumn>
-                <TableColumn fx:id="codeObespX6" prefWidth="75.0" styleClass="table-cell-center" text="Вид обеспечения">
+                <TableColumn prefWidth="75.0" styleClass="table-cell-center" text="Вид обеспечения">
                     <cellValueFactory>
                         <PropertyValueFactory property="obesp" /> </cellValueFactory>
                 </TableColumn>
@@ -47,7 +47,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
             <BorderPane.margin>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                <Insets left="12.0" right="12.0" top="12.0" />
             </BorderPane.margin>
         </TableView>
     </center>

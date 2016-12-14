@@ -29,7 +29,7 @@
                    <cellValueFactory>
                        <PropertyValueFactory property="trNumber" /> </cellValueFactory>
                </TableColumn>
-               <TableColumn fx:id="currencyX5" prefWidth="48.0" styleClass="table-cell-center" text="Валюта">
+               <TableColumn prefWidth="48.0" styleClass="table-cell-center" text="Валюта">
                    <cellValueFactory><CurrencyCellValueFactory /></cellValueFactory>
                </TableColumn>
                <TableColumn prefWidth="129.0" styleClass="table-cell-right" text="Сумма обеспечения">
@@ -83,7 +83,7 @@
                </TableColumn>
            </columns>
            <BorderPane.margin>
-               <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               <Insets left="12.0" right="12.0" top="12.0" />
            </BorderPane.margin>
        </TableView>
    </center>

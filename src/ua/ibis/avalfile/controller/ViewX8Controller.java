@@ -47,31 +47,31 @@ public class ViewX8Controller {
         tableX8.setItems(sortedX8);
     }
 
+    private void loadFile(Path path) {
+        if (path != null) {
+            new FileTask<>(path, datax8, X8Converter::getData).bindAndRun(tableX8);
+            labelX8.setText(path.toString());
+        }
+
+    }
+
     // подготавливаем данные для таблицы
     // вы можете получать их с базы данных
     private void initData() {
 
-        // загрузка конфигурации
-        Properties config = PropertiesValues.getInstance();
-
-        Path path = null;
         datax8 = FXCollections.observableArrayList();
         filteredX8 = new FilteredList<>(datax8);
 
-        path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
-        new FileTask<>(path, datax8, X8Converter::getData).bindAndRun(tableX8);
-        labelX8.setText(path.toString());
+        // загрузка конфигурации
+        Properties config = PropertiesValues.getInstance();
+
+        Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x8.file"));
+        loadFile(path);
     }
 
     public void open(ActionEvent event) {
-
-        Path filepath = selectFile("Choose #X8", "#X8 files", "#X8*.*");
-
-        if(filepath != null) {
-            new FileTask<>(filepath, datax8, X8Converter::getData).bindAndRun(tableX8);
-            labelX8.setText(filepath.toString());
-//            tabPane.getSelectionModel().select(tabX8);
-        }
+        Path path = selectFile("Choose #X8", "#X8 files", "#X8*.*");
+        loadFile(path);
     }
 
     public void setPredicate(Predicate<FileX8> pr) {
