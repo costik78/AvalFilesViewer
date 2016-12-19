@@ -12,7 +12,7 @@
 
 <BorderPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.ViewX6Controller">
     <center>
-        <TableView fx:id="tableX6" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableX6" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn editable="false" prefWidth="75.0" sortable="false" styleClass="table-cell-right" text="#">
                     <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>

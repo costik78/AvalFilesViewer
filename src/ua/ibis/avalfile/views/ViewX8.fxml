@@ -13,7 +13,7 @@
     <center>
         <TableView fx:id="tableX8" prefHeight="324.0" prefWidth="600.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn editable="false" sortable="false" styleClass="table-cell-right" text="#">
+                <TableColumn editable="false" sortable="false" styleClass="table-cell-right" text="#" >
                     <cellValueFactory><IndexingCellValueFactory /></cellValueFactory>
                 </TableColumn>
                 <TableColumn styleClass="table-cell-center" text="МФО">

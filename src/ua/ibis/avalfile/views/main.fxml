@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.control.SplitPane?>
 <BorderPane prefHeight="400.0" prefWidth="624.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.ibis.avalfile.controller.Controller">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
@@ -33,11 +34,13 @@
        </MenuBar>
    </top>
    <center>
+       <SplitPane>
        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
            <Tab fx:id="tabX5" text="Файл #X5"><fx:include fx:id="viewX5" source="ViewX5.fxml"/></Tab>
            <Tab fx:id="tabX6" text="Файл #X6"><fx:include fx:id="viewX6" source="ViewX6.fxml"/></Tab>
            <Tab fx:id="tabX7" text="Файл #X7"><fx:include fx:id="viewX7" source="ViewX7.fxml"/></Tab>
            <Tab fx:id="tabX8" text="Файл #X8"><fx:include fx:id="viewX8" source="ViewX8.fxml"/></Tab>
        </TabPane>
+       </SplitPane>
    </center>
 </BorderPane>

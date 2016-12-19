@@ -14,6 +14,15 @@
     -fx-alignment: CENTER-RIGHT;
 }
 
+.brodetable .column-header {
+    -fx-size: 55;
+}
+
+.brodetable .label {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
 /* horizontal the two nodes are placed to the left/right of each other. */
 /*.split-pane *.split-pane-divider {
     -fx-padding: 0 5 0 1;
