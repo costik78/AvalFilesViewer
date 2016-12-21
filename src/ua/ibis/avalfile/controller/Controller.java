@@ -54,11 +54,16 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        // загрузка конфигурации
-        filterAcc.disableProperty().bind(tabX8.selectedProperty());
-        filterTreat.disableProperty().bind(tabX8.selectedProperty());
-        filterCurrency.disableProperty().bind(tabX8.selectedProperty());
-        filterRegnmbr.disableProperty().bind(tabX8.selectedProperty().not());
+        // связываем доступность меню фильтрации с выбором вкладки #X8
+//        filterAcc.disableProperty().bind(tabX8.selectedProperty());
+//        filterTreat.disableProperty().bind(tabX8.selectedProperty());
+//        filterCurrency.disableProperty().bind(tabX8.selectedProperty());
+//        filterRegnmbr.disableProperty().bind(tabX8.selectedProperty().not());
+        // связываем видимость меню фильтрации с выбором вкладки #X8
+        filterAcc.visibleProperty().bind(tabX8.selectedProperty().not());
+        filterTreat.visibleProperty().bind(tabX8.selectedProperty().not());
+        filterCurrency.visibleProperty().bind(tabX8.selectedProperty().not());
+        filterRegnmbr.visibleProperty().bind(tabX8.selectedProperty());
     }
 
     @FXML
