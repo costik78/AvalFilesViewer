@@ -60,7 +60,7 @@ public class ViewX7Controller {
     private void initData() {
 
         datax7 = FXCollections.observableArrayList();
-        filteredX7 = new FilteredList<>(datax7);
+        filteredX7 = datax7.filtered(null);
 
         // загрузка конфигурации
         Properties config = PropertiesValues.getInstance();

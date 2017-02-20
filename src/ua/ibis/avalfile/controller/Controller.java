@@ -24,6 +24,9 @@ public class Controller {
     private ViewX8Controller viewX8Controller;
 
     @FXML
+    private ViewXDController viewXDController;
+
+    @FXML
     private MenuItem filterAcc;
 
     @FXML
@@ -51,6 +54,9 @@ public class Controller {
 
     @FXML
     private Tab tabX8;
+
+    @FXML
+    private Tab tabXD;
 
     @FXML
     public void initialize() {
@@ -92,6 +98,12 @@ public class Controller {
     }
 
     @FXML
+    private void openXD(ActionEvent event){
+        viewXDController.open(event);
+        tabPane.getSelectionModel().select(tabXD);
+    }
+
+    @FXML
     private void closeApp(ActionEvent event) {
         Platform.exit();
         System.exit(0);
@@ -118,6 +130,8 @@ public class Controller {
                 viewX6Controller.setPredicate(pr);
             } else if (selectedTab == tabX7) {
                 viewX7Controller.setPredicate(pr);
+            } else if (selectedTab == tabXD) {
+                viewXDController.setPredicate(pr);
             }
         }
     }
@@ -142,6 +156,8 @@ public class Controller {
                 viewX6Controller.setPredicate(pr);
             } else if (selectedTab == tabX7) {
                 viewX7Controller.setPredicate(pr);
+            } else if (selectedTab == tabXD) {
+                viewXDController.setPredicate(pr);
             }
         }
     }
@@ -166,6 +182,8 @@ public class Controller {
                 viewX6Controller.setPredicate(pr);
             } else if (selectedTab == tabX7) {
                 viewX7Controller.setPredicate(pr);
+            } else if (selectedTab == tabXD) {
+                viewXDController.setPredicate(pr);
             }
         }
     }
@@ -197,6 +215,8 @@ public class Controller {
             viewX7Controller.setPredicate(null);
         } else if (selectedTab == tabX8) {
             viewX8Controller.setPredicate(null);
+        } else if (selectedTab == tabXD) {
+            viewXDController.setPredicate(null);
         }
     }
 
@@ -206,5 +226,6 @@ public class Controller {
         viewX6Controller.setPredicate(null);
         viewX7Controller.setPredicate(null);
         viewX8Controller.setPredicate(null);
+        viewXDController.setPredicate(null);
     }
 }

@@ -8,17 +8,18 @@ public class FileX5 extends FileXX {
     public final int BLANK_OBESPECHENIE = 90;
 
     private long summaObesp;
-    private int risk;
+    private char clientClass;
+    private char correcterClientClass;
     private long summaReserve;
     private int bs4Reserve;
     private int obespech;
-    private int finState;
     //private String allObesp;
     private long summaObespP23;
     private long summaForgiven;
     private int  DPD;
     private int groupOfClient;
     private double probabilityOfDefault;
+    private double PD;
 
     public long getSummaObesp() {
         return summaObesp;
@@ -28,12 +29,12 @@ public class FileX5 extends FileXX {
         this.summaObesp = summaObesp;
     }
 
-    public int getRisk() {
-        return risk;
+    public char getClientClass() {
+        return clientClass;
     }
 
-    public void setRisk(int risk) {
-        this.risk = risk;
+    public void setClientClass(char clientClass) {
+        this.clientClass = clientClass;
     }
 
     public long getSummaReserve() {
@@ -60,12 +61,12 @@ public class FileX5 extends FileXX {
         this.obespech = obespech.isEmpty() ? BLANK_OBESPECHENIE : Integer.parseInt(obespech);
     }
 
-    public int getFinState() {
-        return finState;
+    public char getCorrecterClientClass() {
+        return correcterClientClass;
     }
 
-    public void setFinState(String  finState) {
-        this.finState = checkFinstate(finState);
+    public void setCorrecterClientClass(char correcterClientClass) {
+        this.correcterClientClass = correcterClientClass;
     }
 
     public long getSummaObespP23() {
@@ -112,14 +113,16 @@ public class FileX5 extends FileXX {
         this.probabilityOfDefault = Double.parseDouble(probabilityOfDefault);
     }
 
-    static int checkFinstate(String finstate)
-    {
-        if(finstate.isEmpty())
-            return 0;
-        else if(finstate.matches("\\d+"))
-            return Integer.parseInt(finstate);
-        else
-            return finstate.charAt(0) - '?';
+    public double getPD() {
+        return PD;
+    }
+
+    public void setPD(String PD) {
+        if(PD.contains(",") ) {
+            PD = PD.replace(',', '.');
+        }
+
+        this.PD = Double.parseDouble(PD);
     }
 
     @Override

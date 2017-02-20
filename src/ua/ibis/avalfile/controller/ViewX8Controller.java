@@ -60,7 +60,7 @@ public class ViewX8Controller {
     private void initData() {
 
         datax8 = FXCollections.observableArrayList();
-        filteredX8 = new FilteredList<>(datax8);
+        filteredX8 = datax8.filtered(null);
 
         // загрузка конфигурации
         Properties config = PropertiesValues.getInstance();

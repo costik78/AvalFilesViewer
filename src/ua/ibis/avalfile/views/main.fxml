@@ -17,6 +17,7 @@
                <MenuItem mnemonicParsing="false" onAction="#openX6" text="Открыть #X6"/>
                <MenuItem mnemonicParsing="false" onAction="#openX7" text="Открыть #X7"/>
                <MenuItem mnemonicParsing="false" onAction="#openX8" text="Открыть #X8"/>
+               <MenuItem mnemonicParsing="false" onAction="#openXD" text="Открыть #XD"/>
                <SeparatorMenuItem mnemonicParsing="false"/>
                <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close"/>
            </Menu>
@@ -40,6 +41,7 @@
            <Tab fx:id="tabX6" text="Файл #X6"><fx:include fx:id="viewX6" source="ViewX6.fxml"/></Tab>
            <Tab fx:id="tabX7" text="Файл #X7"><fx:include fx:id="viewX7" source="ViewX7.fxml"/></Tab>
            <Tab fx:id="tabX8" text="Файл #X8"><fx:include fx:id="viewX8" source="ViewX8.fxml"/></Tab>
+           <Tab fx:id="tabXD" text="Файл #XD"><fx:include fx:id="viewXD" source="ViewXD.fxml"/></Tab>
        </TabPane>
        </SplitPane>
    </center>

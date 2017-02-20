@@ -8,9 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import ua.ibis.avalfile.pojo.FileX6;
+import ua.ibis.avalfile.pojo.FileXD;
 import ua.ibis.avalfile.pojo.FileXX;
-import ua.ibis.avalfile.pojo.X6Converter;
+import ua.ibis.avalfile.pojo.XDConverter;
 import ua.ibis.avalfile.util.PropertiesValues;
 
 import java.nio.file.Path;
@@ -23,59 +23,57 @@ import static ua.ibis.avalfile.controller.MyDialog.selectFile;
 /**
  * Created by conti on 14.12.2016.
  */
-public class ViewX6Controller {
+public class ViewXDController {
 
-    private ObservableList<FileX6> datax6;
+    private ObservableList<FileXD> dataxd;
 
-    private FilteredList<FileX6> filteredX6;
-
-    @FXML
-    private TableView<FileX6> tableX6;
+    private FilteredList<FileXD> filteredXD;
 
     @FXML
-    private Label labelX6;
+    private TableView<FileXD> tableXD;
+
+    @FXML
+    private Label labelXD;
 
     @FXML
     public void initialize() {
         initData();
 
-        SortedList<FileX6> sortedX6 = new SortedList<>(filteredX6);
+        SortedList<FileXD> sortedXD = new SortedList<>(filteredXD);
 
         // связываем сорт-листы с сортировкой таблицы
-        sortedX6.comparatorProperty().bind(tableX6.comparatorProperty());
+        sortedXD.comparatorProperty().bind(tableXD.comparatorProperty());
 
         // заполняем таблицу данными
-        tableX6.setItems(sortedX6);
+        tableXD.setItems(sortedXD);
     }
 
     private void loadFile(Path path) {
         if (path != null) {
-            new FileTask<>(path, datax6, X6Converter::getData).bindAndRun(tableX6);
-            labelX6.setText(path.toAbsolutePath().toString());
+            new FileTask<>(path, dataxd, XDConverter::getData).bindAndRun(tableXD);
+            labelXD.setText(path.toString());
         }
-
     }
 
-    // подготавливаем данные для таблицы
-    // вы можете получать их с базы данных
     private void initData() {
 
-        datax6 = FXCollections.observableArrayList();
-        filteredX6 = datax6.filtered(null);
+        dataxd = FXCollections.observableArrayList();
+        filteredXD = dataxd.filtered(null);
 
         // загрузка конфигурации
         Properties config = PropertiesValues.getInstance();
 
-        Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("x6.file"));
+        Path path = Paths.get(config.getProperty("dirfiles"), config.getProperty("xd.file"));
         loadFile(path);
     }
 
-    public void open(ActionEvent event) {
-        Path path = selectFile("Choose #X6", "#X6 files", "#X6*.*");
+    public void open(ActionEvent event){
+        Path path = selectFile("Choose #XD", "#XD files", "#XD*.*");
         loadFile(path);
     }
 
     public void setPredicate(Predicate<FileXX> pr) {
-        filteredX6.setPredicate(pr);
+        filteredXD.setPredicate(pr);
     }
+
 }

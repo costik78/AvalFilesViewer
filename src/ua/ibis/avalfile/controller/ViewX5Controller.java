@@ -59,7 +59,7 @@ public class ViewX5Controller {
     private void initData() {
 
         datax5 = FXCollections.observableArrayList();
-        filteredX5 = new FilteredList<>(datax5);
+        filteredX5 = datax5.filtered(null);
 
         // загрузка конфигурации
         Properties config = PropertiesValues.getInstance();

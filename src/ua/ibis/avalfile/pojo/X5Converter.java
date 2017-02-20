@@ -39,7 +39,7 @@ public class X5Converter {
                     x5.setSummaObesp(Long.parseLong(field));
                     break;
                 case 7:
-                    x5.setRisk(Integer.parseInt(field));
+                    x5.setClientClass(field.trim().charAt(0));
                     break;
                 case 8:
                     x5.setSummaReserve(Long.parseLong(field));
@@ -51,7 +51,7 @@ public class X5Converter {
                     x5.setObespech(field);
                     break;
                 case 11:
-                    x5.setFinState(field);
+                    x5.setCorrecterClientClass(field.trim().charAt(0));
                     break;
                 // вынесено в файл #X6
 //                case 12:
@@ -71,6 +71,9 @@ public class X5Converter {
                 case 17:
                     x5.setProbabilityOfDefault(field);
                     break;
+                case 18:
+                    x5.setPD(field);
+                    break;
             }
         }
         catch (NumberFormatException e) {
@@ -89,7 +92,6 @@ public class X5Converter {
 
         return treat;
     }
-
 
     public static List<FileX5> getData(Path filepath) {
 

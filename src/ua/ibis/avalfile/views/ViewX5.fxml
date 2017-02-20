@@ -37,9 +37,9 @@
                        <PropertyValueFactory property="summaObesp" /> </cellValueFactory>
                    <cellFactory><MoneyCellFactory /></cellFactory>
                </TableColumn>
-               <TableColumn prefWidth="40.0" styleClass="table-cell-center" text="Риск">
+               <TableColumn prefWidth="40.0" styleClass="table-cell-center" text="Класс клиента">
                    <cellValueFactory>
-                       <PropertyValueFactory property="risk" /> </cellValueFactory>
+                       <PropertyValueFactory property="clientClass" /> </cellValueFactory>
                </TableColumn>
                <TableColumn prefWidth="100.0" styleClass="table-cell-right" text="Сумма резерва">
                    <cellValueFactory>
@@ -54,9 +54,9 @@
                    <cellValueFactory>
                        <PropertyValueFactory property="obespech" /> </cellValueFactory>
                </TableColumn>
-               <TableColumn prefWidth="80.0" styleClass="table-cell-center" text="Финансовое состояние клиента">
+               <TableColumn prefWidth="80.0" styleClass="table-cell-center" text="Скорректированный класс клиента">
                    <cellValueFactory>
-                       <PropertyValueFactory property="finState" /> </cellValueFactory>
+                       <PropertyValueFactory property="correcterClientClass" /> </cellValueFactory>
                </TableColumn>
                <TableColumn text="Виды обеспечения" visible="false" />
                <TableColumn prefWidth="100.0" styleClass="table-cell-right" text="Сумма резерва П23">
@@ -80,6 +80,10 @@
                <TableColumn prefWidth="80.0" styleClass="table-cell-right" text="Вероятность дефолта">
                    <cellValueFactory>
                        <PropertyValueFactory property="probabilityOfDefault" /> </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="80.0" styleClass="table-cell-right" text="PD">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="PD" /> </cellValueFactory>
                </TableColumn>
            </columns>
            <BorderPane.margin>
